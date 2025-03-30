@@ -7,9 +7,14 @@ on:
                 required: true
                 type: string
                 # default: dist
-    workflow_dispatch: 
+        outputs:
+          result:
+            description: the result of deployment operation
+            value: ${{ jobs.deploy.outputs.outcome }}
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.step-result.outputs.step-result }}
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
@@ -20,3 +25,6 @@ jobs:
         run: ls -alh
       - name: Output information
         run: echo "Deploying and uploading..."
+      - name: set result output
+        id: step-result
+        run: echo "step-result=success" >> $GITHUB_OUTPUT
