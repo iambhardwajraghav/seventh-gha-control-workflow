@@ -4,22 +4,19 @@ on:
   - push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            node-version: [12, 14, 16]
+            runner: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.runner }}
     steps:
       - name: Get Code
         uses: actions/checkout@v4
       - name: Install node js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-      - name: Cache Depencies
-        id: cache
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+          node-version: ${{ matrix.node-version }}
       - name: Install dependecies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Build project
         run: npm run build
