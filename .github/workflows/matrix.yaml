@@ -9,7 +9,7 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v4
       - name: Install node js
-        uses: setup-node@v4
+        uses: setup-node@v3
         with:
           node-version: 18
       - name: Cache Depencies
