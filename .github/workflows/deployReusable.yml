@@ -1,4 +1,4 @@
-name: Website Deployment
+name: Website Deployment using Reusable WF
 on:
   push:
     branches:
