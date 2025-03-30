@@ -12,14 +12,14 @@ jobs:
         uses: setup-node@v3
         with:
           node-version: 18
-      - name: Cache Depencies
-        id: cache
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+    #   - name: Cache Depencies
+    #     id: cache
+    #     uses: actions/cache@v4
+    #     with:
+    #       path: node_modules
+    #       key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependecies
-        if: steps.cache.outputs.cache-hit != 'true'
+        # if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Build project
         run: npm run build
