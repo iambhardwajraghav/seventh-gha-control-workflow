@@ -4,9 +4,9 @@ on:
         inputs:
             artifact-name:
                 description: the name of the deployable artifact files
-                required: false
+                required: true
                 type: string
-                default: dist
+                # default: dist
     workflow_dispatch: 
 jobs:
   deploy:
